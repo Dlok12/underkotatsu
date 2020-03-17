@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<!-- Основа для сайта была успешно скопипастчена с https://russia404.net/. Спасибо! -->
+
+<head>
+
+    <title>w8...</title>
+    <meta property="og:title" content="w8..." />
+
+    <meta property="og:type" content="website" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <meta name="theme-color" content="#ffffff">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var deadline = new Date('February 1, 2019 00:00:00');
+
+            var msMinute = 60 * 1000,
+                msHour = 60 * 60 * 1000,
+                msDay = 60 * 60 * 24 * 1000;
+
+            init();
+
+            function init() {
+                var today = new Date();
+                update_time(today)
+            }
+
+            function update_time(today) {
+                var countdown = Math.floor((today - deadline) / msDay) + ":" + get_hours(today) + ":" + get_minutes(today) + ":" + get_seconds(today);
+
+                $("#countdown").text(countdown)
+            }
+
+            function get_hours(today) {
+                var hours = Math.floor(((today - deadline) % msDay) / msHour);
+                if (hours <= 9) hours = "0" + hours;
+                return hours
+            }
+
+            function get_minutes(today) {
+                var minutes = Math.floor(((today - deadline) % msDay % msHour) / msMinute);
+                if (minutes <= 9) minutes = "0" + minutes;
+                return minutes
+            }
+
+            function get_seconds(today) {
+                var seconds = Math.floor(((today - deadline) % msDay % msHour % msMinute) / 1000);
+                if (seconds <= 9) seconds = "0" + seconds;
+                return seconds
+            }
+
+            setInterval(function() {
+
+                var today = new Date();
+                update_time(today)
+
+            }, 1000)
+        })
+
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: #C71010;
+            color: white;
+            /*font-family: Monaco, Courier New, monospace;*/
+            font-family: 'Anonymous Pro', sans-serif;
+            word-break: break-word;
+            overflow-wrap: break-all;
+        }
+
+        .outer {
+            display: table;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            /*text-align: center;*/
+        }
+
+        .middle {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .inner {
+            /*display:none;  DO NOT FORGET TO REMOVE THIS IN OTHER PROJECTS */
+            margin-left: auto;
+            margin-right: auto;
+            width: 80vw;
+            /*display: inline-block;*/
+            /*whatever width you want*/
+        }
+
+        #intro {
+            color: #800303;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.75vw;
+        }
+
+        a,
+        a:focus,
+        a:hover,
+        a:visited {
+            color: #FFFFFF;
+        }
+
+        #countdown {
+            color: #F76A0C;
+            font-size: 10vw;
+            font-family: 'Tahoma', sans-serif;
+        }
+
+        #credits {
+            color: #800303;
+            position: absolute;
+            bottom: 3em;
+            right: 0.5em;
+            width: 6em;
+            font-family: 'Anonymous Pro', sans-serif;
+            font-weight: bold;
+            font-size: 1.25vw;
+        }
+
+        #j {
+            color: #800303;
+            position: absolute;
+            bottom: 1em;
+            right: 0.5em;
+            width: 6em;
+            font-size: 1.25vw;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="fb-root"></div>
+
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+
+                <span id="intro">Ожидаем <a href="https://vk.com/id108596892" target="_blank">Змеюкича</a> уже</span>
+                <h1 id="countdown">000:00:00:00</h1>
+            </div>
+        </div>
+    </div>
+    <div id="credits">
+        DnD<br />
+        где-то близко...<br />
+    </div>
+    <div id="j">
+        <a href="https://www.google.com/search?q=%E3%82%84%E3%82%8C%E3%82%84%E3%82%8C%E3%81%A0%E3%81%9C&newwindow=1&rlz=1C1SQJL_ruRU856RU856&sxsrf=ACYBGNQSPgWpm2wfFj7HzLvYlB42tXxkiA:1575147057989&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjt1vCG6JLmAhXRxIsKHXz-CkQQ_AUoAXoECAwQAw&biw=1366&bih=667" target="_blank">やれやれだぜ</a>
+    </div>
+</body>
+
+</html>
