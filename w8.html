@@ -105,7 +105,7 @@ $(document).ready((function() {
   var btnScrollDown = document.querySelector('#scroll_down');
   
   btnScrollDown.addEventListener('click', () => window.scrollTo({
-  top: window.innerHeight,
+  top: (1.2 * window.innerHeight),
   behavior: 'smooth',
 }));
 }))
