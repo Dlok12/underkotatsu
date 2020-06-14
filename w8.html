@@ -19,17 +19,18 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            var deadline = new Date('February 1, 2019 00:00:00');
-
             var msMinute = 60 * 1000,
                 msHour = 60 * 60 * 1000,
                 msDay = 60 * 60 * 24 * 1000;
+
+            var deadline = new Date('February 1, 2019 00:00:00');
 
             init();
 
             function init() {
                 var today = new Date();
-                update_time(today)
+                update_time(today);
+                zeros(today);
             }
 
             function update_time(today) {
@@ -55,16 +56,65 @@
                 if (seconds <= 9) seconds = "0" + seconds;
                 return seconds
             }
+            
+            function time_to_seconds(today) {
+                var seconds = Math.floor((today - deadline) / 1000);
+                return seconds
+            }
+            
+            function zeros(today) {
+                let row_count = 25;
+                let zero = "0 ";
+		let zeros_intro = "Count of zeros (Vladoss): ";
+
+		let para = document.createElement("div", "id='zero'");
+/*let para = document.insertAdjacentHTML("afterend", "<div></div>")*/
+
+                document.getElementById("count-zeros").innerHTML = zeros_intro;
+                document.getElementById("count-zeros").innerHTML += Math.floor((today - deadline) / msDay);
+
+                document.getElementById("zeros").innerHTML = "";
+                document.getElementById("zeros").appendChild(para);
+
+
+		for (let i = 1; i <= (today - deadline) / msDay; i++) {
+		    document.getElementById("zeros").innerHTML += zero;
+		    if (i % row_count == 0) {
+		        document.getElementById("zeros").appendChild(para);
+		    }
+		}
+            }
+
 
             setInterval(function() {
 
                 var today = new Date();
-                update_time(today)
+                update_time(today);
+                zeros(today);
 
             }, 1000)
         })
-
     </script>
+
+
+    <script type="text/javascript">
+ /* -------------------------------------------------------------------------
+     begin Scroll Down Button
+   * ------------------------------------------------------------------------- */
+$(document).ready((function() {
+  var btnScrollDown = document.querySelector('#scroll_down');
+  
+  btnScrollDown.addEventListener('click', () => window.scrollTo({
+  top: window.innerHeight,
+  behavior: 'smooth',
+}));
+}))
+  /* -------------------------------------------------------------------------
+     end Scroll Down Button
+   * ------------------------------------------------------------------------- */
+    </script>
+
+
 
     <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
@@ -76,7 +126,7 @@
         }
 
         body {
-            background: #C71010;
+	    background: #B50909;
             color: white;
             /*font-family: Monaco, Courier New, monospace;*/
             font-family: 'Anonymous Pro', sans-serif;
@@ -109,7 +159,7 @@
         }
 
         #intro {
-            color: #800303;
+            color: #6B0404;/*#800303;*/
             font-weight: bold;
             text-align: center;
             font-size: 1.75vw;
@@ -129,7 +179,7 @@
         }
 
         #credits {
-            color: #800303;
+            color: #6B0404;
             position: absolute;
             bottom: 3em;
             right: 0.5em;
@@ -140,13 +190,133 @@
         }
 
         #j {
-            color: #800303;
+            color: #6B0404;
             position: absolute;
             bottom: 1em;
             right: 0.5em;
             width: 6em;
             font-size: 1.25vw;
         }
+	
+	#count-zeros-intro {
+            font-weight: bold;
+            font-size: 1.75vw;
+
+            position: absolute;
+            left: 2em;
+            top: 120%;
+        }
+
+	#count-zeros {
+            font-weight: bold;
+            font-size: 1.75vw;
+
+            position: absolute;
+            left: 2em;
+            top: 120%;
+        }
+
+        #zeros {
+            font-weight: bold;
+            font-size: 1.75vw;
+
+            position: absolute;
+            left: 4em;
+            top: 127%;
+        }
+
+        #foot-zeros {
+            font-weight: bold;
+            font-size: 1.75vw;
+
+            position: absolute;
+            left: 4em;
+            top: 2127%;
+            bottom: 2550%;
+        }
+
+        #zero {
+            position: absolute;
+            left: 2em;
+        }
+
+
+
+/* -------------------------------------------------------------------------
+   begin Scroll Down Button
+ * ------------------------------------------------------------------------- */
+button.scroll_down {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  height: 5vw;
+  width: 10vw;
+  bottom: 5%;
+  background-color: transparent;
+  border: 0px solid;
+//  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+}
+button.scroll_down:before {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  content: '';
+  width: 1vw;
+  height: 1vw;
+  margin-left: -3px;
+  background-color: #F76A0C;
+  border-radius: 100%;
+  -webkit-animation: scroll_down_btn-animation 2s infinite;
+  animation: scroll_down_btn-animation 2s infinite;
+  box-sizing: border-box;
+  color: #F76A0C;
+}
+
+@keyframes scroll_down_btn-animation {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    transform: translate(0, 20px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes scroll_down_btn-animation {
+  0% {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    -webkit-transform: translate(0, 20px);
+    transform: translate(0, 20px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   end Scroll Down Button 
+ * ------------------------------------------------------------------------- */
+
+
 
     </style>
 
@@ -164,7 +334,20 @@
                 <h1 id="countdown">000:00:00:00</h1>
             </div>
         </div>
+
     </div>
+
+
+<!-- test -->
+  <div class="wrapper">
+    <!-- begin Scroll Down Button -->
+    <button type="button" class="scroll_down" id="scroll_down"></button>
+    <!-- end Scroll Down Button -->
+  </div>
+  <div class="block"></div>
+<!-- test -->
+            
+
     <div id="credits">
         DnD<br />
         где-то близко...<br />
@@ -172,6 +355,15 @@
     <div id="j">
         <a href="https://www.google.com/search?q=%E3%82%84%E3%82%8C%E3%82%84%E3%82%8C%E3%81%A0%E3%81%9C&newwindow=1&rlz=1C1SQJL_ruRU856RU856&sxsrf=ACYBGNQSPgWpm2wfFj7HzLvYlB42tXxkiA:1575147057989&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjt1vCG6JLmAhXRxIsKHXz-CkQQ_AUoAXoECAwQAw&biw=1366&bih=667" target="_blank">やれやれだぜ</a>
     </div>
+
+    <div>
+        <span id="count-zeros"></span>
+        <span id="zeros"></span>
+	<span id="foot-zeros"></span>
+    </div>
+
+
+
 </body>
 
 </html>
